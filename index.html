@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hooni｜GodiVanLife</title>
+
+<style>
+:root {
+    --main-color: #ff9f43;
+    --bg1: #fff8f2;
+    --bg2: #ffe8d6;
+    --accent: #ff6b6b;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'PingFang TC','Microsoft JhengHei',sans-serif;
+    background: linear-gradient(-45deg,var(--bg1),var(--bg2),#fff0e6,var(--bg1));
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
+    text-align: center;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    max-width: 420px;
+    margin: auto;
+    background: white;
+    padding: 28px;
+    border-radius: 35px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 6px solid var(--main-color);
+    object-fit: cover;
+    margin-bottom: 15px;
+    transition: 0.4s ease;
+}
+
+.profile-img:hover {
+    transform: rotate(3deg) scale(1.05);
+}
+
+h1 {
+    margin: 10px 0;
+    color: var(--main-color);
+    font-size: 28px;
+}
+
+.tagline {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.info-card {
+    background: #fff3e6;
+    padding: 18px;
+    border-radius: 18px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 30px;
+    border: none;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.btn-call {
+    background: var(--main-color);
+}
+
+.btn-call:hover {
+    background: var(--accent);
+}
+
+.btn-sms {
+    background: #007aff;
+}
+
+.btn-sms:hover {
+    background: #005ecc;
+}
+
+.instagram-link {
+    display: block;
+    margin-top: 15px;
+    padding: 12px;
+    background: linear-gradient(45deg,#f09433,#dc2743,#bc1888);
+    color: white;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 25px;
+    font-size: 11px;
+    color: #999;
+    letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="images/hooni.jpg" alt="Hooni" class="profile-img">
+
+<h1>Hooni</h1>
+<p class="tagline">GodiVanLife 智慧守護系統</p>
+
+<div class="info-card">
+    <div class="info-item">✨ 特色：愛吃、很瘋、很奇怪 🤪</div>
+    <div class="info-item">💩 特殊技能：愛吃大便（請幫忙阻止他）</div>
+</div>
+
+<button class="btn btn-sms" onclick="sendSMSLocation()">
+📍 即時定位通報
+</button>
+
+<a href="tel:09633692253" class="btn btn-call">
+📞 撥打主人 1
+</a>
+
+<a href="tel:0966109090" class="btn btn-call">
+📞 撥打主人 2
+</a>
+
+<a href="https://www.instagram.com/pompom_jrt" target="_blank" class="instagram-link">
+看 Hooni 的 IG 📸
+</a>
+
+<footer>
+POWERED BY GODIVANLIFE
+</footer>
+
+</div>
+
+<script>
+function sendSMSLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const mapUrl = "https://www.google.com/maps?q=" + lat + "," + lng;
+            const message = encodeURIComponent("【尋寵通報】我發現 Hooni！目前位置：" + mapUrl);
+            window.location.href = "sms:09633692253?body=" + message;
+        });
+    } else {
+        window.location.href = "sms:09633692253?body=" + 
+        encodeURIComponent("【尋寵通報】我發現 Hooni，請與我聯繫。");
+    }
+}
+</script>
+
+</body>
+</html>
